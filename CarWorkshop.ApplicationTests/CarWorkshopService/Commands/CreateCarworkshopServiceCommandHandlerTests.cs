@@ -37,7 +37,7 @@ namespace CarWorkshop.Application.CarWorkshopService.Commands.Tests
 
             var userContextMock = new Mock<IUserContext>();
             userContextMock.Setup(c => c.GetCurrentUser())
-                .Returns(new CurrentUser("1", "test@test.com", new List<string> { "User" }));
+                .Returns(new CurrentUser("1", "test@test.com", new List<string> { "User" }, "Maciek"));
 
             var carWorkshopRepositoryMock = new Mock<ICarWorkshopRepository>();
             carWorkshopRepositoryMock.Setup(c => c.GetByEncodedName(command.CarWorkshopEncodedName)).ReturnsAsync(carWorkshop);
@@ -76,7 +76,7 @@ namespace CarWorkshop.Application.CarWorkshopService.Commands.Tests
 
             var userContextMock = new Mock<IUserContext>();
             userContextMock.Setup(c => c.GetCurrentUser())
-                .Returns(new CurrentUser("2", "test@test.com", new List<string> { "Moderator" }));
+                .Returns(new CurrentUser("2", "test@test.com", new List<string> { "Moderator" }, "Maciek"));
 
             var carWorkshopRepositoryMock = new Mock<ICarWorkshopRepository>();
             carWorkshopRepositoryMock.Setup(c => c.GetByEncodedName(command.CarWorkshopEncodedName)).ReturnsAsync(carWorkshop);
@@ -113,7 +113,7 @@ namespace CarWorkshop.Application.CarWorkshopService.Commands.Tests
 
             var userContextMock = new Mock<IUserContext>();
             userContextMock.Setup(c => c.GetCurrentUser())
-                .Returns(new CurrentUser("2", "test@test.com", new List<string> { "User" }));
+                .Returns(new CurrentUser("2", "test@test.com", new List<string> { "User" }, "Maciek"));
 
             var carWorkshopRepositoryMock = new Mock<ICarWorkshopRepository>();
             carWorkshopRepositoryMock.Setup(c => c.GetByEncodedName(command.CarWorkshopEncodedName)).ReturnsAsync(carWorkshop);

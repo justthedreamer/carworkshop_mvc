@@ -22,7 +22,7 @@ namespace CarWorkshop.Application.Mappings.Tests
             //arrage
             var userContextMock = new Mock<IUserContext>();
             userContextMock.Setup(c => c.GetCurrentUser())
-                .Returns(new CurrentUser("1", "test@example.com", new[] { "Moderator" }));
+                .Returns(new CurrentUser("1", "test@example.com", new[] { "Moderator" }, "Maciek"));
 
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(
                 new CarWorkshopMappingProfile(userContextMock.Object)));
@@ -56,7 +56,7 @@ namespace CarWorkshop.Application.Mappings.Tests
             //arrage
             var userContextMock = new Mock<IUserContext>();
             userContextMock.Setup(c => c.GetCurrentUser())
-                .Returns(new CurrentUser("1", "test@example.com", new[] { "Moderator" }));
+                .Returns(new CurrentUser("1", "test@example.com", new[] { "Moderator" },"Maciek"));
 
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(
                 new CarWorkshopMappingProfile(userContextMock.Object)));

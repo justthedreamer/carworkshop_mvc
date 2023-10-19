@@ -1,4 +1,5 @@
-﻿using CarWorkshop.Domain.Interfaces;
+﻿using CarWorkshop.Application.ApplicationUser;
+using CarWorkshop.Domain.Interfaces;
 using CarWorkshop.Infrastructure.Persistance;
 using CarWorkshop.Infrastructure.Repositories;
 using CarWorkshop.Infrastructure.Seenders;
@@ -30,6 +31,8 @@ namespace CarWorkshop.Infrastructure.Extensions
             services.AddScoped<ICarWorkshopRepository, CarWorkshopRepository>();
 
             services.AddScoped<ICarWorkshopServiceRepository, CarWorkshopServiceRepository>();
+
+            services.AddScoped<ICarWorkshopRatingRepository, CarworkshopRatingRepository>();
 
         }
     }

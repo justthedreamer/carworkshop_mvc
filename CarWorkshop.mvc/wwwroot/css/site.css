@@ -1,3 +1,10 @@
+﻿:root {
+    --star-size: 22px;
+    --star-color: #999;
+    --star-background: #fc0;
+}
+
+
 html {
   font-size: 14px;
 }
@@ -7,6 +14,7 @@ html {
     font-size: 16px;
   }
 }
+
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
@@ -35,4 +43,121 @@ body {
 }
 .gap-4{
     gap: 1rem !important;
+}
+
+/* Stars rating */
+
+.Stars {
+    --percent: calc(var(--rating) / 5 * 100%);
+    display: inline-block;
+    font-size: var(--star-size);
+    font-family: Times;
+    line-height: 1;
+}
+.Stars::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.starInput {
+    --percent: calc(var(--rating) / 1 * 100%);
+    display: inline-block;
+    font-size: var(--star-size);
+    font-family: Times;
+    line-height: 1;
+}
+    .starInput::before {
+        content: '★';
+        letter-spacing: 3px;
+        background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+
+/*Sidebar*/
+
+#sidebar-right {
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    position: fixed;
+    top: 2%;
+    right: 1%;
+    max-width: 60%;
+    min-width: 50%;
+    height: 80%;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    z-index: 1;
+
+    transition: .5s all;
+}
+#sidebar-right.hidden{
+    transform: translateX(110%)
+}
+#sidebar-right-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5%
+}
+#sidebar-right-close-button{
+  border: none;
+  background-color: transparent;
+  font-size: 2em;
+}
+#sidebar-right-content{
+    overflow-y: scroll;
+    height: 50%;
+}
+#sidebar-right-form-container{
+  height: 25%;
+}
+#sidebar-right-form-container > .description > textarea{
+  width: 100%;
+}
+.rate {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.user-name{
+  width: 100px;
+  font-weight: 600;
+}
+.user-photo{
+  margin-left: 1em;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: #283;
+    margin-right: .5rem;
+}
+.rating-description{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  border: 1px solid #999;
+  width: calc(100% - 2rem);  
+  margin-block: 1em;
+  margin-inline: auto;
+  padding: 1em;
+
+  label{
+    position: absolute;
+    background-color: white;
+    font-size: 1em;
+    top:  calc((-1) * var(--star-size)/2);
+    left: .5em;
+  }
+}
+.rating-date{
+  font-size: .75rem;
+  align-self: flex-end;
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CarWorkshop.Domain.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace CarWorkshop.Application.ApplicationUser
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserContext(IHttpContextAccessor httpContextAccessor)
+        public UserContext(IHttpContextAccessor httpContextAccessor )
         {
             _httpContextAccessor = httpContextAccessor;
         }
@@ -34,9 +35,9 @@ namespace CarWorkshop.Application.ApplicationUser
             var id = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
             var email = user.FindFirst(c => c.Type == ClaimTypes.Email)!.Value;
             var roles = user.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value);
+            var username = user.FindFirst(c => c.Type == ClaimTypes.Name)!.Value;
 
-
-            return new CurrentUser(id, email,roles);
+            return new CurrentUser(id, email,roles, username);
         }
     }
 }

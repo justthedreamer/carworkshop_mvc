@@ -43,7 +43,7 @@ namespace CarWorkshop.Application.CarWorkshopService.Commands.Tests
             {
                 Cost = "",
                 Description = "",
-                CarWorkshopEncodedName = null
+                CarWorkshopEncodedName = null!
             };
 
             // act

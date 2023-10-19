@@ -7,8 +7,11 @@ using AutoMapper;
 using CarWorkshop.Application.ApplicationUser;
 using CarWorkshop.Application.CarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop;
+using CarWorkshop.Application.CarWorkshopRating;
 using CarWorkshop.Application.CarWorkshopService;
 using CarWorkshop.Domain.Entities;
+using CarWorkshop.Domain.Interfaces;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace CarWorkshop.Application.Mappings
 {
@@ -36,9 +39,9 @@ namespace CarWorkshop.Application.Mappings
 
             CreateMap<CarWorkshopDto, EditCarWorkshopCommand>();
 
-            CreateMap<CarWorkshopServiceDto, Domain.Entities.CarWorkshopService>()
-                .ReverseMap();
-        
+            CreateMap<Domain.Entities.CarWorkshopRating, CarWorkshopRatingDto>()
+                .ForMember(dto => dto.IsEditiable, opt => opt.MapFrom(src => user != null && (src.CreatedById == user.Id || user.IsInRole("Moderator"))))
+                .ForMember(dto => dto.CreatedByName, opt => opt.MapFrom(src => src.CreatedBy!.UserName));
         }
     }
 }

@@ -25,7 +25,7 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
 
         public async Task<Unit> Handle(CreateCarWorkshopCommand request, CancellationToken cancellationToken)
         {
-            var currentUser = _userContext.GetCurrentUser();
+            var currentUser =  _userContext.GetCurrentUser();
             var isEditiable = currentUser != null && (currentUser.IsInRole("Owner") || currentUser.IsInRole("Moderator"));
 
             if(!isEditiable) 

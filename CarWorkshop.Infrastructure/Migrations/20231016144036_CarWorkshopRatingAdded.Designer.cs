@@ -4,6 +4,7 @@ using CarWorkshop.Infrastructure.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarWorkshop.Infrastructure.Migrations
 {
     [DbContext(typeof(CarWorkshopDbContext))]
-    partial class CarWorkshopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231016144036_CarWorkshopRatingAdded")]
+    partial class CarWorkshopRatingAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,23 +70,15 @@ namespace CarWorkshop.Infrastructure.Migrations
                     b.Property<int>("CarWorkshopId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rate")
-                        .HasColumnType("int");
+                    b.Property<float>("Rate")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CarWorkshopId");
-
-                    b.HasIndex("CreatedById");
 
                     b.ToTable("Ratings");
                 });
@@ -361,13 +356,7 @@ namespace CarWorkshop.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
-
                     b.Navigation("CarWorkshop");
-
-                    b.Navigation("CreatedBy");
                 });
 
             modelBuilder.Entity("CarWorkshop.Domain.Entities.CarWorkshopService", b =>

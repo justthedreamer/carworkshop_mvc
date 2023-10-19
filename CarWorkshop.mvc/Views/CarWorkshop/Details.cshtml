@@ -6,6 +6,9 @@
 
 <h1>@Model.Name</h1>
 
+
+<div class="rating" data-encoded-name="@Model.EncodedName"></div>
+
 <div>
     <h4>CarWorkshopDto</h4>
     <hr />
@@ -49,6 +52,8 @@
     </dl>
 </div>
 
+<div class="ratings" id="ratings" data-encoded-name="@Model.EncodedName"></div>
+
 <div>
     @if(Model.IsEditable || User.IsInRole("Moderator"))
     {
@@ -64,4 +69,6 @@
 
 @section Scripts {
     <script src="~/js/CarWorkshop/Details.js"></script>
+    <script src="~/js/CarWorkshop/Ratings.js"></script>
+    <script src="~/js/CarWorkshop/RatingStarsStatic.js"></script>
 }

@@ -16,7 +16,7 @@ namespace CarWorkshop.Application.ApplicationUser.Tests
         {
             // arrange
 
-            var currentUser = new CurrentUser("1","test@test.com", new List<string> { "Admin", "User" });
+            var currentUser = new CurrentUser("1","test@test.com", new List<string> { "Admin", "User" }, "Maciek");
 
             // act
 
@@ -32,7 +32,7 @@ namespace CarWorkshop.Application.ApplicationUser.Tests
         {
             // arrange
 
-            var currentUser = new CurrentUser("1", "test@test.com", new List<string> { "Admin", "User" });
+            var currentUser = new CurrentUser("1", "test@test.com", new List<string> { "Admin", "User" }, "Maciek");
 
             // act
 
@@ -48,7 +48,7 @@ namespace CarWorkshop.Application.ApplicationUser.Tests
         {
             // arrange
 
-            var currentUser = new CurrentUser("1", "test@test.com", new List<string> { "Admin", "User" });
+            var currentUser = new CurrentUser("1", "test@test.com", new List<string> { "Admin", "User" }, "Maciek");
 
             // act
 

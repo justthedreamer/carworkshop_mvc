@@ -4,6 +4,8 @@ using CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop;
 using CarWorkshop.Application.CarWorkshop.Queries.GetAllCarWorkshops;
 using CarWorkshop.Application.CarWorkshop.Queries.GetCarWorkshopByEncodedName;
+using CarWorkshop.Application.CarWorkshopRating.Commands;
+using CarWorkshop.Application.CarWorkshopRating.Queries.GetCarWorkshopRatingQuery;
 using CarWorkshop.Application.CarWorkshopService.Commands;
 using CarWorkshop.Application.CarWorkshopService.Queries.GetAllCarWorkshopServices;
 using CarWorkshop.mvc.Extensions;
@@ -30,14 +32,12 @@ namespace CarWorkshop.mvc.Controllers
             return View(carWorkshop);
         }
 
-
         [Route("CarWorkshop/{encodedName}/Details")]
         public async Task<IActionResult> Details(string encodedName) 
         {
             var dto = await _mediator.Send(new GetCarWorkshopByEncodedNameQuery(encodedName));
             return View(dto);
         }
-
 
 
         [Route("CarWorkshop/{encodedName}/Edit")]
@@ -113,5 +113,29 @@ namespace CarWorkshop.mvc.Controllers
 
             return Ok(data);
         }
+
+        [HttpGet]
+        [Route("CarWorkshop/{encodedName}/CarWorkshopRating")]
+        public async Task<IActionResult> GetCarWorkshopRatings(string encodedName)
+        {
+            var data = await _mediator.Send(new GetCarWorkshopRatingQuery()
+            { EncodedName = encodedName });
+
+            return Ok(data);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("CarWorkshop/{encodedName}/CarWorkshopRatings")]
+        public async Task<IActionResult> CreateCarWorkshopRating(CreateCarWorkshopRatingCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            return Ok(ModelState);
+        }
+
     }
 }

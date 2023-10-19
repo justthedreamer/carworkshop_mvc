@@ -24,7 +24,8 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.EditCarWorkshop
         {
             var carWorkshop = await _repository.GetByEncodedName(encodedName: request.EncodedName!);
 
-            var user = _userContext.GetCurrentUser();
+            var user =  _userContext.GetCurrentUser();
+
             var isEditible = user != null && (carWorkshop.CreatedById == user.Id || user.IsInRole("Moderator"));
 
             if(!isEditible) 

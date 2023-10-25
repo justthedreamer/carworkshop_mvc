@@ -1,4 +1,6 @@
-﻿const RenderCarWorkshopServices = (services, container) => {
+﻿/* Car workshop services*/
+
+const RenderCarWorkshopServices = (services, container) => {
         container.empty();
 
         for (const service of services) {
@@ -10,8 +12,8 @@
                     </div>
                 </div>`
             );
-        }
     }
+}
 
 const LoadCarWorkshopServices = () => {
         const container = $("#services")
@@ -24,7 +26,6 @@ const LoadCarWorkshopServices = () => {
                 if (!data.length) {
                     container.html("There are no services for this car workshop")
                 } else {
-
                     RenderCarWorkshopServices(data, container)
                 }
             },
@@ -34,42 +35,26 @@ const LoadCarWorkshopServices = () => {
         })
 }
 
-
-
-const LoadCarWorkshopRatings = () => {
-    const container = $("#ratings")
-    const carWorkshopEncodedName = container.data("encodedName")
-
-    $.ajax(
-        {
-            url: `/CarWorkshop/${carWorkshopEncodedName}/CarWorkshopRating`,
-            type: 'get',
-            success: function (data) {
-                if (!data.length) {
-                    container.html("There are no rating for this car workshop")
-                } else {
-                    RednderCarWorkshopRating(data, container)
-                }
-            },
-            error: function () {
-                toastr["error"]("Something goes wrong with rating loader")
-            }
-        })
-}
+/* Rating Stars */
 
 const RenderCarWorkshopRatingStars = (ratings, container) => {
 
+    /* Calculate everage */
     var encodedName = $(container).data("encodedName");
-        let totalRate = 0;
+    let totalRate = 0;
 
-        for (const rate of ratings) {
-            totalRate += rate.rate;
-        }
+    for (const rate of ratings) {
+        totalRate += rate.rate;
+    }
+    const average = ratings.length === 0 ? 0 : totalRate / ratings.length;
 
-        const averageRate = totalRate / ratings.length;
+    /* Rounded average */
+    const rateAverage = average === 0 ? 0 : average.toFixed(1);
 
-    $(container).append(`<div onclick="RenderRatingsInRightSidebar(event)" class="Stars" style="--rating: ${averageRate}; --star-size: 22px" data-encoded-name="${encodedName}"></div><span class="ratingCount text-secondary">(${ratings.length})</span>`)
-
+    /* Append component */
+    $(container).append(`
+    <div class="Stars" style="--rating: ${rateAverage }; --star-size: 22px" data-encoded-name="${encodedName}"></div>
+    <span class="ratingCount text-secondary">${rateAverage} (${ratings.length})</span>`)
 }
 
 const LoadCarWorkshopRatingStars = () => {
@@ -95,194 +80,45 @@ const LoadCarWorkshopRatingStars = () => {
 }
 
 
-const AppendRatingsToSidebar = (container, ratings) => {
-
-    $(container).empty();
-    ratings.forEach((rate) => {
-        container.append(`
-           <div class="w-100 mt-5" style="width: 18rem">
-            <div class="rate">
-            <div class="user-photo"></div>
-            <div class="user-name">${rate.createdByName}</div>
-            <div class="rating-description">
-                <label>
-                    <div class="Stars" style="--rating: ${rate.rate}; --star-size: 22px"></div>
-
-                </label>
-                <p>${rate.description}</p>
-                <span class="rating-date text-secondary">${rate.createdAt}</span>
-            </div>
-            </div>
-        </div>
-        `)
-    })
-}
-
-const RednderCarWorkshopRating = (ratings, container) => {
+/* Ratings */
+const RenderCarWorkshopRatings = (ratings, container) => {
     container.empty();
 
     for (const rating of ratings) {
         container.append(
-            `  <div class="w-100 mt-5" style="width: 18rem">
-            <div class="rate">
-            <div class="user-photo"></div>
-            <div class="user-name">${rate.createdByName}</div>
-            <div class="rating-description">
-                <label>
-                    <div class="Stars" style="--rating: ${rate.rate}; --star-size: 22px"></div>
-
-                </label>
-                <p>${rate.description}</p>
-                <span class="rating-date text-secondary">${rate.createdAt}</span>
-            </div>
-            </div>
-        </div>
-        `
+            `<div class="ratingItem rounded shadow border-1 border-dark p-3 mt-3">
+                <div class="w-100" style="max-width: 18rem">
+                    <div class="ratingHeader">
+                        <h5>${rating.createdByName}</h5>
+                        <div class="Stars" style="--rating: ${rating.rate}; --star-size: 22px"></div>
+                    </div>
+                    <div class="ratingContent mt-3 ps-1">
+                        <p>${rating.description}</p>
+                    </div>
+                </div>
+            </div>`
         );
     }
 }
 
+const LoadCarWorkshopRatings = () => {
+    console.log('dddd')
+    const container = $("#ratingsSection")
+    const carWorkshopEncodedName = container.data("encodedName")
 
-const GetCarWorkshopRatings = (encodedName) => {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: `/CarWorkshop/${encodedName}/CarWorkshopRating`,
-            type: 'get',
-            success: function (data) {
-                resolve(data);
-            },
-            error: function () {
-                reject('Something went wrong'); 
-            }
-        });
-    });
-};
-
-/* right sitebar */
-const sidebarRight = $("#sidebar-right")
-const sidebarRightContent = $('#sidebar-right-content')
-const sidebarRightCloseButton = $('#sidebar-right-close-button')
-const siberRightFormContainer = $('#sidebar-right-form-container')
-$(sidebarRightCloseButton).on('click', () => ToggleSidebar(sidebarRight))
-
-
-class RatingsSidebarRightStrategy {
-    constructor() {
-        this.container = sidebarRightContent;
-    }
-    renderContent(ratings) {
-        this.container.empty();
-
-        for (const rating of ratings) {
-            this.container.append(
-                `
-                <div class="w-100 mt-5" style="width: 18rem">
-                    <div class="rate">
-                    <div class="user-photo"></div>
-                    <div class="user-name">${rating.createdByName}</div>
-                    <div class="rating-description">
-                        <label>
-                            <div class="Stars" style="--rating: ${rating.rate} ; --star-size: 22px;"></div>
-                        </label>
-
-                        <p>${rating.description}</p>
-
-                        <span class="rating-date text-secondary">
-                            ${rating.createdAt}
-                        </span>
-                    </div>
-                    </div>
-                </div>
-                 `
-            );
-        }
-    }
-}
-class RatingFormSidebarRightStrategy {
-    constructor() {
-        this.container = siberRightFormContainer
-    }
-
-    renderContent(encodedName) {
-        this.container.empty();
-        this.container.append(
-            `
-                <div>
-                    <h6>Rating</h6>
-                    ${this.ratingComponent()}
-                </div>
-                <div>
-                    <h6>Description</h6>
-                </div>
-            `
-        )
-    }
-
-}
-class SidebarRender {
-    constructor() {
-        this.strategy = null;
-    }
-
-    setStrategy(strategy) {
-        this.strategy = strategy;
-    }
-
-    render(data) {
-        if (this.strategy) {
-            this.strategy.renderContent(data)
-        }
-    }
-}
-
-const RenderRatingsInRightSidebar = async (event) => {
-
-    var object = $(event.target)
-    $(object).on('click', ToggleSidebar(sidebarRight))
-
-    try {
-        var encodedName = $(event.target).data('encodedName')
-        var ratings = await GetCarWorkshopRatings(encodedName);
-
-        var sidebarRender = new SidebarRender();
-        sidebarRender.setStrategy(new RatingsSidebarRightStrategy())
-        sidebarRender.render(ratings)
-
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-const ToggleSidebar = (object) => {
-    var sidebar = object;
-    sidebar.toggleClass('hidden');
-}
-
-const RenderRatingForm = () => {
-    var starsContainer = $("#starsInput")
-    var stars = []
-
-    for (let i = 1; i <= 5; i++) {
-        starsContainer.append(`<span id="${i}" class="starInput" style="--rating: 0;" onClick="CheckedRating(event)"> </span>`)
-        var starObject = $(`#${i}`)
-        stars.push(starObject)
-    }
-
-    CheckedRating = (event) => {
-        var starId = $(event.target).attr("id")
-        var ratingInput = $("#ratingInput")
-        $(ratingInput).val(starId)
-
-
-        for (let i = 0; i < 5; i++) {
-
-            if (i < starId) {
-                stars[i].css("--rating", "1")
+    $.ajax({
+        url: `/CarWorkshop/${carWorkshopEncodedName}/CarWorkshopRating`,
+        type: 'get',
+        success: function (data) {
+            if (!data.length) {
+                container.html("There are no rating for this car workshop")
             } else {
-                stars[i].css("--rating", "0")
+                RenderCarWorkshopRatings(data, container)
             }
+        },
+        error: function () {
+            toastr["error"]("Something goes wrong")
         }
-    }
+    })
 }
 
-RenderRatingForm();

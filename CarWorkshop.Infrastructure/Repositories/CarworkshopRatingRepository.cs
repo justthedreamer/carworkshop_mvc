@@ -22,17 +22,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         public async Task CreateNewRating(CarWorkshopRating rating)
         {
             _dbContext.Ratings.Add(rating);
-            await _dbContext.SaveChangesAsync();
         }
-
-        public async Task<double> GetAverage(Domain.Entities.CarWorkshop carWorkshop)
-        {
-            var ratings = _dbContext.Ratings.Where(r => r.CarWorkshopId == carWorkshop.Id);
-            var avarage = ratings.Average(r => r.Rate);
-
-            return avarage;
-        }
-
         public async Task<IEnumerable<CarWorkshopRating>> GetCarworkshopRatings(Domain.Entities.CarWorkshop carworkshop)
         {
             var ratings = await _dbContext.Ratings.Where(c => c.CarWorkshopId == carworkshop.Id).ToListAsync();
@@ -56,5 +46,10 @@ namespace CarWorkshop.Infrastructure.Repositories
 
             return result;
         }
+        public async Task Commit()
+        {
+            await _dbContext.SaveChangesAsync();
+        }
+
     }
 }

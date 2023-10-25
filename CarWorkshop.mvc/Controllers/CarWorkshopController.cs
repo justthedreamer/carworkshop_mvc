@@ -67,14 +67,14 @@ namespace CarWorkshop.mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize(Roles = "Owner")]
+        [Authorize]
         public IActionResult Create()
         {
                 return View();
         }
 
         [HttpPost]
-        [Authorize(Roles = "Owner")]
+        [Authorize]
         public async Task<IActionResult> Create(CreateCarWorkshopCommand command)
         {
             if (!ModelState.IsValid)
@@ -82,11 +82,9 @@ namespace CarWorkshop.mvc.Controllers
                 return View(command);
             }
 
-
             await _mediator.Send(command);
 
             this.SetNotification("success", $"Created carworkshop: {command.Name}");
-            
 
             return RedirectToAction(nameof(Index));
         }
@@ -126,16 +124,16 @@ namespace CarWorkshop.mvc.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("CarWorkshop/{encodedName}/CarWorkshopRatings")]
+        [Route("CarWorkshop/CarWorkshopRating")]
         public async Task<IActionResult> CreateCarWorkshopRating(CreateCarWorkshopRatingCommand command)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            await _mediator.Send(command);
             
-            return Ok(ModelState);
+            return Ok();
         }
-
     }
 }

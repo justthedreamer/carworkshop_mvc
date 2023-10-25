@@ -11,7 +11,7 @@ namespace CarWorkshop.Domain.Interfaces
     {
         Task CreateNewRating(CarWorkshopRating rating);
         Task<IEnumerable<CarWorkshopRating>> GetCarworkshopRatings(Domain.Entities.CarWorkshop carworkshop );
-        Task<double> GetAverage(Domain.Entities.CarWorkshop carWorkshop);
+        Task Commit();
 
     }
 

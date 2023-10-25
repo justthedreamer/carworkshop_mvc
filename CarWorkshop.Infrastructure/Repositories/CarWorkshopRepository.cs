@@ -39,6 +39,10 @@ namespace CarWorkshop.Infrastructure.Repositories
         {
             return _dbContext.CarWorkshops.FirstOrDefaultAsync(cw => cw.Name.ToLower() == name.ToLower());
         }
+        public async Task<Domain.Entities.CarWorkshop> GetById(int id)
+        {
+            return await _dbContext.CarWorkshops.FirstOrDefaultAsync(c => c.Id == id);
+        }
 
     }
 }

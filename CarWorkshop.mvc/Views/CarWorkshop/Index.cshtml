@@ -10,28 +10,7 @@
     <a asp-action="Create" class="btn btn-secondary">Create New</a>
 </p>
 
- <aside id="sidebar-right" class="sidebar-right p-4 hidden">
-    <div id="sidebar-right-header">
-        <h2>Ratings</h2>
-        <button id="sidebar-right-close-button">X</button>
-    </div>
 
-    <div id="sidebar-right-content"></div>
-
-    <div id="sidebar-right-form-container">
-        
-        <h2>Add new rate</h2>
-
-        <div id="starsInput">
-            <input type="text" id="ratingInput" value="0" hidden>
-        </div>
-
-        <div class="description">
-            <h3>Description</h3>
-            <textarea name="Description" ></textarea>
-        </div>
-    </div>
-</aside> 
 
 <div class="row">
     @foreach (var item in Model)
@@ -39,7 +18,7 @@
         <div class="card m-3" style="width: 18rem">
             <div class="card-body">
                 <h5 class="card-title">@item.Name</h5>
-                <div class="rating " data-encoded-name="@item.EncodedName"></div>
+                <div class="rating" data-encoded-name="@item.EncodedName"></div>
                 <h6 class="card-subtitle mb-2 text-muted">@item.PhoneNumber</h6>
                 <p class="card-text">@item.Description</p>
                 <a class="btn btn-primary" asp-controller="CarWorkshop" asp-action="Details" asp-route-encodedName="@item.EncodedName">Details</a>
@@ -50,11 +29,9 @@
                 }
             </div>
         </div>
-
     }
 </div>
 
 @section Scripts{
-    <script src="~/js/CarWorkshop/RatingStarsStatic.js"></script>
-    <script src="~/js/Components/RightSidebar.js"></script>
+    <script src="~/js//CarWorkshop/Index.js"></script>
 }

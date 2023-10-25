@@ -61,7 +61,6 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
 .starInput {
     --percent: calc(var(--rating) / 1 * 100%);
     display: inline-block;
@@ -75,89 +74,16 @@ body {
         background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-    }
+}
 
 
 /*Sidebar*/
+.ratingItem{
+  max-width: 50%;
+  border: solid;
+}
+.ratingHeader{
 
-#sidebar-right {
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    position: fixed;
-    top: 2%;
-    right: 1%;
-    max-width: 60%;
-    min-width: 50%;
-    height: 80%;
-    background-color: #fff;
-    border: 1px solid #bbb;
-    z-index: 1;
-
-    transition: .5s all;
 }
-#sidebar-right.hidden{
-    transform: translateX(110%)
-}
-#sidebar-right-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 5%
-}
-#sidebar-right-close-button{
-  border: none;
-  background-color: transparent;
-  font-size: 2em;
-}
-#sidebar-right-content{
-    overflow-y: scroll;
-    height: 50%;
-}
-#sidebar-right-form-container{
-  height: 25%;
-}
-#sidebar-right-form-container > .description > textarea{
-  width: 100%;
-}
-.rate {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.user-name{
-  width: 100px;
-  font-weight: 600;
-}
-.user-photo{
-  margin-left: 1em;
-    width: 50px;
-    height: 50px;
-    border: 1px solid black;
-    border-radius: 50%;
-    background-color: #283;
-    margin-right: .5rem;
-}
-.rating-description{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
-  border: 1px solid #999;
-  width: calc(100% - 2rem);  
-  margin-block: 1em;
-  margin-inline: auto;
-  padding: 1em;
-
-  label{
-    position: absolute;
-    background-color: white;
-    font-size: 1em;
-    top:  calc((-1) * var(--star-size)/2);
-    left: .5em;
-  }
-}
-.rating-date{
-  font-size: .75rem;
-  align-self: flex-end;
+.ratingContent{
 }

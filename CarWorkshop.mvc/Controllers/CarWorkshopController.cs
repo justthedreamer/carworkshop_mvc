@@ -70,7 +70,7 @@ namespace CarWorkshop.mvc.Controllers
         [Authorize]
         public IActionResult Create()
         {
-                return View();
+            return View();
         }
 
         [HttpPost]

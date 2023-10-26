@@ -1,9 +1,16 @@
 ﻿@model CarWorkshop.Application.CarWorkshopRating.Commands.CreateCarWorkshopRatingCommand
 
-<!-- Button trigger modal -->
-<button id="addNewRateButton" type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#createCarWorkshopRating">
-    Add new rate
-</button>
+@if(User.Identity is null || !User.Identity.IsAuthenticated)
+{
+    <a href="/Identity/Account/Login" class="btn btn-primary">Add new rate</a>
+}
+else
+{
+    <button id="addNewRateButton" type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#createCarWorkshopRating">
+        Add new rate
+    </button>
+
+}
 
 <!-- Modal -->
 <div class="modal fade" id="createCarWorkshopRating" tabindex="-1" aria-labelledby="createCarWorkshopRatingLabel" aria-hidden="true">

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Shared.ApplicationUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace CarWorkshop.Domain.Entities
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public string? CreatedById { get; set; }
-        public IdentityUser? CreatedBy { get; set; }
+        public ApplicationUser? CreatedBy { get; set; }
 
         public int CarWorkshopId { get; set; } = default!;
         public CarWorkshop CarWorkshop { get; set; }

@@ -87,3 +87,8 @@ body {
 }
 .ratingContent{
 }
+#Rate{
+    position: absolute;
+    visibility:hidden;
+
+}

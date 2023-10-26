@@ -22,6 +22,7 @@ namespace CarWorkshop.Infrastructure.Repositories
         public async Task CreateNewRating(CarWorkshopRating rating)
         {
             _dbContext.Ratings.Add(rating);
+            await _dbContext.SaveChangesAsync();
         }
         public async Task<IEnumerable<CarWorkshopRating>> GetCarworkshopRatings(Domain.Entities.CarWorkshop carworkshop)
         {

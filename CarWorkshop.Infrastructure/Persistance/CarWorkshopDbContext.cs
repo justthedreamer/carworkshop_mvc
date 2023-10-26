@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CarWorkshop.Application.ApplicationUser;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Shared.ApplicationUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Persistance
 {
-    public class CarWorkshopDbContext : IdentityDbContext
+    public class CarWorkshopDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Domain.Entities.CarWorkshop> CarWorkshops { get; set; }
         public DbSet<Domain.Entities.CarWorkshopService> Services { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Shared.ApplicationUser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,10 @@ namespace CarWorkshop.Domain.Entities
         public string? Description { get; set; }
         public DateTime CreateAt { get; set; } = DateTime.UtcNow;
         public CarWoskshopContactDetails ContactDetails { get; set; } = default!;
+
         public string? About { get; set; }
-
-
         public string? CreatedById { get; set; }
-        public IdentityUser? CreatedBy { get; set; }
-        
+        public ApplicationUser? CreatedBy { get; set; }
         public string? EncodedName { get; private set; } = default!;
 
         public List<CarWorkshopService> Services { get; set; } = new();

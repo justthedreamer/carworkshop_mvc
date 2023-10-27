@@ -56,6 +56,7 @@ namespace CarWorkshop.mvc.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("CarWorkshop/{encodedName}/Edit")]
         public async Task<IActionResult> Edit(string encodedName ,EditCarWorkshopCommand command)
         {
@@ -75,6 +76,7 @@ namespace CarWorkshop.mvc.Controllers
 
         [HttpPost]
         [Authorize]
+        [Route("CarWorkshop/Create")]
         public async Task<IActionResult> Create(CreateCarWorkshopCommand command)
         {
             if (!ModelState.IsValid)
@@ -90,7 +92,7 @@ namespace CarWorkshop.mvc.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Owner")]
+        [Authorize]
         [Route("CarWorkshop/CarWorkshopService")]
         public async Task<IActionResult> CreateCarWorkshopService(CreateCarworkshopServiceCommand command)
         {

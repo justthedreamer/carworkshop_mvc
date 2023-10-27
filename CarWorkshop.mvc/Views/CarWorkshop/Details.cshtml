@@ -54,11 +54,6 @@
 <div class="ratings" id="ratings" data-encoded-name="@Model.EncodedName"></div>
 
 <div>
-    @if(Model.IsEditable || User.IsInRole("Moderator"))
-    {
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
-    }
-    <br />
     @if (!User.IsInRole("Owner"))
     {
     <partial class="row" name="_CreateCarWorkshopRating" model="new CarWorkshop.Application.CarWorkshopRating.Commands.CreateCarWorkshopRatingCommand() { CarWorkshopEncodedName = Model.EncodedName }" />

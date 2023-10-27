@@ -28,9 +28,9 @@ namespace CarWorkshop.Application.CarWorkshopService.Commands
 
 
             var user =  userContext.GetCurrentUser();
-            var isEditible = user != null && (carWorkshop.CreatedById == user.Id || user.IsInRole("Moderator"));
+            var isEditable = user != null && (carWorkshop.CreatedById == user.Id || user.IsInRole("Moderator"));
 
-            if (!isEditible)
+            if (!isEditable)
             {
                 return Unit.Value;
             }

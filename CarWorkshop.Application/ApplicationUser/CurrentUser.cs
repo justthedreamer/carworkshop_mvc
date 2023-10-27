@@ -22,5 +22,6 @@ namespace CarWorkshop.Application.ApplicationUser
         }
 
         public bool IsInRole(string role) => Roles.Contains(role);
+        public bool IsEnableToCreate() => !Roles.Contains("Banned");
     }
 }

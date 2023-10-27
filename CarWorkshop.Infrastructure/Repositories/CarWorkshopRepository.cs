@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Repositories
 {
-    internal class CarWorkshopRepository : ICarWorkshopRepository
+    public class CarWorkshopRepository : ICarWorkshopRepository
     {
         private readonly CarWorkshopDbContext _dbContext;
-        public CarWorkshopRepository(CarWorkshopDbContext dbContext) 
+        public CarWorkshopRepository(CarWorkshopDbContext dbContext)
         {
             _dbContext = dbContext;
         }

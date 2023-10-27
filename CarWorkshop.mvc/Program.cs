@@ -2,11 +2,21 @@ using CarWorkshop.Infrastructure.Persistance;
 using CarWorkshop.Infrastructure.Seenders;
 using CarWorkshop.Infrastructure.Extensions;
 using CarWorkshop.Application.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Shared.ApplicationUser;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
+builder.Services.AddSession();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -29,7 +39,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();

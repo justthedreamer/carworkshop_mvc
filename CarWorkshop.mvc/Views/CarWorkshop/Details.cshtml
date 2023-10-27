@@ -10,7 +10,6 @@
 <div class="rating" data-encoded-name="@Model.EncodedName"></div>
 
 <div>
-    <h4>CarWorkshopDto</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -55,11 +54,13 @@
 <div class="ratings" id="ratings" data-encoded-name="@Model.EncodedName"></div>
 
 <div>
-    @if(Model.IsEditable || User.IsInRole("Moderator"))
+    @if (!User.IsInRole("Owner"))
     {
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
+    <partial class="row" name="_CreateCarWorkshopRating" model="new CarWorkshop.Application.CarWorkshopRating.Commands.CreateCarWorkshopRatingCommand() { CarWorkshopEncodedName = Model.EncodedName }" />
     }
+    <br />
     <a asp-action="Index">Back to List</a>
+
 </div>
 
 <h2 class="mt-4">Services</h2>
@@ -67,8 +68,16 @@
 <div id="services" class="d-flex flex-wrap gap-2 mt-4 m-0 p-0" data-encoded-name="@Model.EncodedName">
 </div>
 
+<h2 class="mt-4">Ratings</h2>
+
+<div id="ratingsSection" class="" data-encoded-name="@Model.EncodedName">
+</div>
+
+
 @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script src="~/js/CarWorkshop/Details.js"></script>
-    <script src="~/js/CarWorkshop/Ratings.js"></script>
-    <script src="~/js/CarWorkshop/RatingStarsStatic.js"></script>
+    <script src="~/js/CarWorkshop/RatingForm.js"></script>
 }

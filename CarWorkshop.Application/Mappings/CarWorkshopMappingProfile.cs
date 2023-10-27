@@ -17,6 +17,9 @@ namespace CarWorkshop.Application.Mappings
 {
     public class CarWorkshopMappingProfile : Profile
     {
+        private IUserContext userContext;
+
+
         public CarWorkshopMappingProfile(IUserContext userContext) {
 
             var user = userContext.GetCurrentUser();
@@ -38,6 +41,8 @@ namespace CarWorkshop.Application.Mappings
                 .ForMember(dto => dto.PhoneNumber, opt => opt.MapFrom((src => src.ContactDetails.PhoneNumber)));
 
             CreateMap<CarWorkshopDto, EditCarWorkshopCommand>();
+
+            CreateMap<CarWorkshopServiceDto, Domain.Entities.CarWorkshopService>().ReverseMap();
 
             CreateMap<Domain.Entities.CarWorkshopRating, CarWorkshopRatingDto>()
                 .ForMember(dto => dto.IsEditiable, opt => opt.MapFrom(src => user != null && (src.CreatedById == user.Id || user.IsInRole("Moderator"))))

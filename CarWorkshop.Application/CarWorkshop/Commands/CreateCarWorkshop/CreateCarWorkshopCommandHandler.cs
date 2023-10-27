@@ -26,9 +26,9 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
         public async Task<Unit> Handle(CreateCarWorkshopCommand request, CancellationToken cancellationToken)
         {
             var currentUser =  _userContext.GetCurrentUser();
-            var isEditiable = currentUser != null && (currentUser.IsInRole("Owner") || currentUser.IsInRole("Moderator"));
+            var isEditable = currentUser != null && currentUser.IsEnableToCreate();
 
-            if(!isEditiable) 
+            if(!isEditable) 
             {
                 return Unit.Value;
             }
@@ -36,7 +36,7 @@ namespace CarWorkshop.Application.CarWorkshop.Commands.CreateCarWorkshop
             var carWorkshop = _mapper.Map<Domain.Entities.CarWorkshop>(request);
             carWorkshop.EncodeName();
 
-            carWorkshop.CreatedById = currentUser.Id;
+            carWorkshop.CreatedById = currentUser?.Id;
 
             await _carWorkshopRepository.Create(carWorkshop);
 

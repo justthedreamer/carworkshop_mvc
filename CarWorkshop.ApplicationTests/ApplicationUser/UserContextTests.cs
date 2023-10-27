@@ -25,6 +25,7 @@ namespace CarWorkshop.Application.ApplicationUser.Tests
                 new Claim(ClaimTypes.Email, "test@example.com"),
                 new Claim(ClaimTypes.Role, "Admin"),
                 new Claim(ClaimTypes.Role, "User"),
+                new Claim(ClaimTypes.Name, "User"),
             };
 
             var user = new ClaimsPrincipal(new ClaimsIdentity(claims, "Test"));
@@ -48,6 +49,7 @@ namespace CarWorkshop.Application.ApplicationUser.Tests
             currentUser!.Id.Should().Be("1");
             currentUser!.Email.Should().Be("test@example.com");
             currentUser!.Roles.Should().ContainInOrder("Admin", "User");
+            currentUser!.UserName.Should().Be("User");
 
         }
     }

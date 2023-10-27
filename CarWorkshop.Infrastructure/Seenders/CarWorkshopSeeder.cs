@@ -15,7 +15,6 @@ namespace CarWorkshop.Infrastructure.Seenders
             _dbContext = dbContext;
 
         }
-
         public async Task Seed()
         {
             if(await _dbContext.Database.CanConnectAsync())

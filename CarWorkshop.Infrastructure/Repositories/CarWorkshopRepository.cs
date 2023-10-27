@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Repositories
 {
-    internal class CarWorkshopRepository : ICarWorkshopRepository
+    public class CarWorkshopRepository : ICarWorkshopRepository
     {
         private readonly CarWorkshopDbContext _dbContext;
-        public CarWorkshopRepository(CarWorkshopDbContext dbContext) 
+        public CarWorkshopRepository(CarWorkshopDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -38,6 +38,10 @@ namespace CarWorkshop.Infrastructure.Repositories
         public Task<Domain.Entities.CarWorkshop?> GetByName(string name)
         {
             return _dbContext.CarWorkshops.FirstOrDefaultAsync(cw => cw.Name.ToLower() == name.ToLower());
+        }
+        public async Task<Domain.Entities.CarWorkshop> GetById(int id)
+        {
+            return await _dbContext.CarWorkshops.FirstOrDefaultAsync(c => c.Id == id);
         }
 
     }

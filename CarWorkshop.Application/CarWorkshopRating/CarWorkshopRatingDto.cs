@@ -8,9 +8,9 @@ namespace CarWorkshop.Application.CarWorkshopRating
 {
     public class CarWorkshopRatingDto
     {
-        public int CarWorkshopId { get; set; }
         public int Rate { get; set; }
         public string? Description { get; set; }
+        public string CarWorkshopEncodedName { get; set; }
         public string? CreatedByName { get; set; }
         public string CreatedById { get; set; }
         public string? CreatedAt { get; set; }
